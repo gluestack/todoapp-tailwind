@@ -1,0 +1,7 @@
+[
+  {
+    "schedule": "* * * * *",
+    "type": "function or webhook",
+    "value": "function name or webhook url"
+  }
+]

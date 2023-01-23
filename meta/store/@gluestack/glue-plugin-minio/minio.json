@@ -1,0 +1,10 @@
+{
+  "status": "down",
+  "port_number": 10310,
+  "console_port_number": 9160,
+  "container_id": null,
+  "minio_credentials": {
+    "username": "gluestack",
+    "password": "password"
+  }
+}
