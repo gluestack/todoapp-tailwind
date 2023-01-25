@@ -1,8 +1,0 @@
-table:
-  name: files
-  schema: public
-insert_permissions:
-  - role: guest
-    permission:
-      check: {}
-      columns: '*'

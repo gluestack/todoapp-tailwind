@@ -1,1 +1,0 @@
-@gluestack/glue-plugin-auth

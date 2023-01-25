@@ -1,3 +1,0 @@
-
-CREATE DATABASE IF NOT EXISTS `todo_db`;
-GRANT ALL PRIVILEGES ON DATABASE `todo_db` TO `postgres`;
