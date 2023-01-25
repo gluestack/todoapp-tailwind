@@ -1,4 +1,5 @@
 import * as express from "express";
+import * as cors from "cors";
 import Locals from "./locals";
 import Routes from "./routes";
 const session = require('express-session');
@@ -39,6 +40,9 @@ class Express {
    * Mounts all the defined routes
    */
   private mountRoutes(): void {
+    this.express.use(cors({
+      "exposedHeaders": ["x-hasura-user-token"]
+    }));
     this.express.use(express.json());
     this.express.use(session({ secret: 'app-secret' }));
     this.express.engine("html", require("ejs").renderFile);
