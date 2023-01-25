@@ -22,7 +22,8 @@
     "@gluestack/glue-plugin-graphql": "^0.0.32",
     "@gluestack/glue-plugin-minio": "^0.0.12",
     "@gluestack/glue-plugin-postgres": "^0.0.17",
-    "@gluestack/glue-plugin-storage": "^0.0.22"
+    "@gluestack/glue-plugin-storage": "^0.0.22",
+    "@gluestack/glue-plugin-web": "^0.1.12"
   },
   "peerDependencies": {
     "@gluestack/framework": "^0.0.x"
