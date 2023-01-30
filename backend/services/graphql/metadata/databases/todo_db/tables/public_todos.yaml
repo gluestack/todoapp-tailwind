@@ -1,0 +1,58 @@
+table:
+  name: todos
+  schema: public
+object_relationships:
+  - name: file
+    using:
+      foreign_key_constraint_on: file_id
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
+insert_permissions:
+  - role: user
+    permission:
+      check: {}
+      set:
+        user_id: x-hasura-user-id
+      columns:
+        - created_at
+        - file_id
+        - file_path
+        - id
+        - is_completed
+        - title
+        - updated_at
+        - user_id
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - created_at
+        - file_id
+        - file_path
+        - id
+        - is_completed
+        - title
+        - updated_at
+        - user_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - file_id
+        - file_path
+        - is_completed
+        - title
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      check: null
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id

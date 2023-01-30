@@ -3,12 +3,12 @@ services:
   auth:
     container_name: auth
     restart: always
-    build: /Users/sandeepkumar/code/work/application/gluestack/examples/todoapp-tailwind/backend/functions/auth
+    build: /Users/sandeepkumar/code/work/application/gluestack/examples/todoapp-tailwind/backend/services/auth
     volumes:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/todoapp-tailwind/backend/functions/auth:/server
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/todoapp-tailwind/backend/services/auth:/server
       - /server/node_modules
     env_file:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/todoapp-tailwind/backend/functions/auth/.env
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/todoapp-tailwind/backend/services/auth/.env
   engine:
     container_name: engine
     restart: always
@@ -33,21 +33,21 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/todoapp-tailwind/backend/functions/graphql/.db-data:/hasura
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/todoapp-tailwind/backend/services/graphql/.db-data:/hasura
     env_file:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/todoapp-tailwind/backend/functions/graphql/.env
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/todoapp-tailwind/backend/services/graphql/.env
     depends_on:
       postgres:
         condition: service_healthy
   storage:
     container_name: storage
     restart: always
-    build: /Users/sandeepkumar/code/work/application/gluestack/examples/todoapp-tailwind/backend/functions/storage
+    build: /Users/sandeepkumar/code/work/application/gluestack/examples/todoapp-tailwind/backend/services/storage
     volumes:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/todoapp-tailwind/backend/functions/storage:/server
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/todoapp-tailwind/backend/services/storage:/server
       - /server/node_modules
     env_file:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/todoapp-tailwind/backend/functions/storage/.env
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/todoapp-tailwind/backend/services/storage/.env
   postgres:
     container_name: postgres
     restart: always

@@ -23,21 +23,14 @@
   "@gluestack/glue-plugin-graphql": [
     {
       "instance": "graphql",
-      "directory": "./backend/functions/graphql",
+      "directory": "./backend/services/graphql",
       "container_store": {}
     }
   ],
   "@gluestack/glue-plugin-auth": [
     {
       "instance": "auth",
-      "directory": "./backend/functions/auth",
-      "container_store": {}
-    }
-  ],
-  "@gluestack/glue-plugin-storage": [
-    {
-      "instance": "storage",
-      "directory": "./backend/functions/storage",
+      "directory": "./backend/services/auth",
       "container_store": {}
     }
   ],
@@ -45,6 +38,13 @@
     {
       "instance": "minio",
       "directory": "./backend/storage/minio",
+      "container_store": {}
+    }
+  ],
+  "@gluestack/glue-plugin-storage": [
+    {
+      "instance": "storage",
+      "directory": "./backend/services/storage",
       "container_store": {}
     }
   ],

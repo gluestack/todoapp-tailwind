@@ -1,3 +1,5 @@
+db
+dist
 .DS_store
 node_modules
 .vscode
@@ -5,3 +7,4 @@ node_modules
 *.lock
 yarn-error.log
 *.tar
+.next

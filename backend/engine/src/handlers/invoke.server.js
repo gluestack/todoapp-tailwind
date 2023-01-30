@@ -39,12 +39,15 @@ module.exports = async (req, res) => {
       data,
       options
     );
+
     return res.status(200).json({
       status: true,
       message: 'OK',
       data: resp
     });
   } catch (e) {
+    console.log(`Error invoking ${appId}::${methodName}: ${err}`);
+
     return res.status(500).json({
       status: false,
       errors: e.message
