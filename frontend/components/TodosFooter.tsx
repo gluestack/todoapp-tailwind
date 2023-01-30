@@ -1,8 +1,10 @@
 import React from 'react'
+import { useApp } from '../context/app';
 import { useData } from '../context/data';
 import { useDeleteTodosMutation } from '../services/__generated__';
 
 const TodosFooter = () => {
+  const { toggleToast }: any = useApp();
   const [itemsLeft, setItemsLeft] = React.useState(0);
   const [markCompleted, setMarkCompleted] = React.useState(false);
   const { todos, deleteCompletedTodos, filter, setFilter }: any = useData();
@@ -21,8 +23,10 @@ const TodosFooter = () => {
       if (data?.delete_todos?.affected_rows > 0) {
         deleteCompletedTodos();
       }
+      toggleToast({ success: true, display: true, message: 'Todos deleted successfully!' });
     } catch (error) {
       console.error(error);
+      toggleToast({ success: false, display: true, message: 'Failed to delete todos!' });
     }
   }
 

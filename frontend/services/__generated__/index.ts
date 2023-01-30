@@ -862,6 +862,7 @@ export type Todos = {
   /** An object relationship */
   file?: Maybe<Files>;
   file_id?: Maybe<Scalars['Int']>;
+  file_path?: Maybe<Scalars['String']>;
   id: Scalars['Int'];
   is_completed: Scalars['Boolean'];
   title: Scalars['String'];
@@ -917,6 +918,7 @@ export type Todos_Bool_Exp = {
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   file?: InputMaybe<Files_Bool_Exp>;
   file_id?: InputMaybe<Int_Comparison_Exp>;
+  file_path?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Int_Comparison_Exp>;
   is_completed?: InputMaybe<Boolean_Comparison_Exp>;
   title?: InputMaybe<String_Comparison_Exp>;
@@ -943,6 +945,7 @@ export type Todos_Insert_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   file?: InputMaybe<Files_Obj_Rel_Insert_Input>;
   file_id?: InputMaybe<Scalars['Int']>;
+  file_path?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   is_completed?: InputMaybe<Scalars['Boolean']>;
   title?: InputMaybe<Scalars['String']>;
@@ -956,6 +959,7 @@ export type Todos_Max_Fields = {
   __typename?: 'todos_max_fields';
   created_at?: Maybe<Scalars['timestamptz']>;
   file_id?: Maybe<Scalars['Int']>;
+  file_path?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -967,6 +971,7 @@ export type Todos_Min_Fields = {
   __typename?: 'todos_min_fields';
   created_at?: Maybe<Scalars['timestamptz']>;
   file_id?: Maybe<Scalars['Int']>;
+  file_path?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
@@ -994,6 +999,7 @@ export type Todos_Order_By = {
   created_at?: InputMaybe<Order_By>;
   file?: InputMaybe<Files_Order_By>;
   file_id?: InputMaybe<Order_By>;
+  file_path?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   is_completed?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
@@ -1014,6 +1020,8 @@ export enum Todos_Select_Column {
   /** column name */
   FileId = 'file_id',
   /** column name */
+  FilePath = 'file_path',
+  /** column name */
   Id = 'id',
   /** column name */
   IsCompleted = 'is_completed',
@@ -1029,6 +1037,7 @@ export enum Todos_Select_Column {
 export type Todos_Set_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   file_id?: InputMaybe<Scalars['Int']>;
+  file_path?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   is_completed?: InputMaybe<Scalars['Boolean']>;
   title?: InputMaybe<Scalars['String']>;
@@ -1072,6 +1081,7 @@ export type Todos_Stream_Cursor_Input = {
 export type Todos_Stream_Cursor_Value_Input = {
   created_at?: InputMaybe<Scalars['timestamptz']>;
   file_id?: InputMaybe<Scalars['Int']>;
+  file_path?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['Int']>;
   is_completed?: InputMaybe<Scalars['Boolean']>;
   title?: InputMaybe<Scalars['String']>;
@@ -1093,6 +1103,8 @@ export enum Todos_Update_Column {
   CreatedAt = 'created_at',
   /** column name */
   FileId = 'file_id',
+  /** column name */
+  FilePath = 'file_path',
   /** column name */
   Id = 'id',
   /** column name */
@@ -1396,21 +1408,29 @@ export type InsertTodoMutationVariables = Exact<{
 }>;
 
 
-export type InsertTodoMutation = { __typename?: 'mutation_root', insert_todos?: { __typename?: 'todos_mutation_response', returning: Array<{ __typename?: 'todos', id: number, title: string, is_completed: boolean, user_id: number, file_id?: number | null, created_at: any, updated_at: any }> } | null };
+export type InsertTodoMutation = { __typename?: 'mutation_root', insert_todos?: { __typename?: 'todos_mutation_response', returning: Array<{ __typename?: 'todos', id: number, title: string, is_completed: boolean, user_id: number, file_id?: number | null, file_path?: string | null, created_at: any, updated_at: any }> } | null };
 
 export type FetchTodosQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchTodosQuery = { __typename?: 'query_root', todos: Array<{ __typename?: 'todos', id: number, title: string, is_completed: boolean, user_id: number, file_id?: number | null, created_at: any, updated_at: any }> };
+export type FetchTodosQuery = { __typename?: 'query_root', todos: Array<{ __typename?: 'todos', id: number, title: string, is_completed: boolean, user_id: number, file_id?: number | null, file_path?: string | null, created_at: any, updated_at: any }> };
 
 export type UpdateTodoMutationVariables = Exact<{
   id: Scalars['Int'];
-  title?: InputMaybe<Scalars['String']>;
   is_completed?: InputMaybe<Scalars['Boolean']>;
 }>;
 
 
-export type UpdateTodoMutation = { __typename?: 'mutation_root', update_todos_by_pk?: { __typename?: 'todos', id: number, created_at: any, is_completed: boolean, title: string, updated_at: any, user_id: number, file_id?: number | null } | null };
+export type UpdateTodoMutation = { __typename?: 'mutation_root', update_todos_by_pk?: { __typename?: 'todos', id: number, created_at: any, is_completed: boolean, title: string, updated_at: any, user_id: number, file_id?: number | null, file_path?: string | null } | null };
+
+export type InsertTodoFileIdMutationVariables = Exact<{
+  id: Scalars['Int'];
+  file_id?: InputMaybe<Scalars['Int']>;
+  file_path?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type InsertTodoFileIdMutation = { __typename?: 'mutation_root', update_todos_by_pk?: { __typename?: 'todos', id: number, created_at: any, is_completed: boolean, title: string, updated_at: any, user_id: number, file_id?: number | null, file_path?: string | null } | null };
 
 export type DeleteTodoMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -1434,6 +1454,7 @@ export const InsertTodoDocument = gql`
       is_completed
       user_id
       file_id
+      file_path
       created_at
       updated_at
     }
@@ -1475,6 +1496,7 @@ export const FetchTodosDocument = gql`
     is_completed
     user_id
     file_id
+    file_path
     created_at
     updated_at
   }
@@ -1508,11 +1530,8 @@ export type FetchTodosQueryHookResult = ReturnType<typeof useFetchTodosQuery>;
 export type FetchTodosLazyQueryHookResult = ReturnType<typeof useFetchTodosLazyQuery>;
 export type FetchTodosQueryResult = Apollo.QueryResult<FetchTodosQuery, FetchTodosQueryVariables>;
 export const UpdateTodoDocument = gql`
-    mutation UpdateTodo($id: Int!, $title: String, $is_completed: Boolean) {
-  update_todos_by_pk(
-    pk_columns: {id: $id}
-    _set: {title: $title, is_completed: $is_completed}
-  ) {
+    mutation UpdateTodo($id: Int!, $is_completed: Boolean) {
+  update_todos_by_pk(pk_columns: {id: $id}, _set: {is_completed: $is_completed}) {
     id
     created_at
     is_completed
@@ -1520,6 +1539,7 @@ export const UpdateTodoDocument = gql`
     updated_at
     user_id
     file_id
+    file_path
   }
 }
     `;
@@ -1539,7 +1559,6 @@ export type UpdateTodoMutationFn = Apollo.MutationFunction<UpdateTodoMutation, U
  * const [updateTodoMutation, { data, loading, error }] = useUpdateTodoMutation({
  *   variables: {
  *      id: // value for 'id'
- *      title: // value for 'title'
  *      is_completed: // value for 'is_completed'
  *   },
  * });
@@ -1551,6 +1570,51 @@ export function useUpdateTodoMutation(baseOptions?: Apollo.MutationHookOptions<U
 export type UpdateTodoMutationHookResult = ReturnType<typeof useUpdateTodoMutation>;
 export type UpdateTodoMutationResult = Apollo.MutationResult<UpdateTodoMutation>;
 export type UpdateTodoMutationOptions = Apollo.BaseMutationOptions<UpdateTodoMutation, UpdateTodoMutationVariables>;
+export const InsertTodoFileIdDocument = gql`
+    mutation InsertTodoFileId($id: Int!, $file_id: Int, $file_path: String) {
+  update_todos_by_pk(
+    pk_columns: {id: $id}
+    _set: {file_id: $file_id, file_path: $file_path}
+  ) {
+    id
+    created_at
+    is_completed
+    title
+    updated_at
+    user_id
+    file_id
+    file_path
+  }
+}
+    `;
+export type InsertTodoFileIdMutationFn = Apollo.MutationFunction<InsertTodoFileIdMutation, InsertTodoFileIdMutationVariables>;
+
+/**
+ * __useInsertTodoFileIdMutation__
+ *
+ * To run a mutation, you first call `useInsertTodoFileIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useInsertTodoFileIdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [insertTodoFileIdMutation, { data, loading, error }] = useInsertTodoFileIdMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      file_id: // value for 'file_id'
+ *      file_path: // value for 'file_path'
+ *   },
+ * });
+ */
+export function useInsertTodoFileIdMutation(baseOptions?: Apollo.MutationHookOptions<InsertTodoFileIdMutation, InsertTodoFileIdMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<InsertTodoFileIdMutation, InsertTodoFileIdMutationVariables>(InsertTodoFileIdDocument, options);
+      }
+export type InsertTodoFileIdMutationHookResult = ReturnType<typeof useInsertTodoFileIdMutation>;
+export type InsertTodoFileIdMutationResult = Apollo.MutationResult<InsertTodoFileIdMutation>;
+export type InsertTodoFileIdMutationOptions = Apollo.BaseMutationOptions<InsertTodoFileIdMutation, InsertTodoFileIdMutationVariables>;
 export const DeleteTodoDocument = gql`
     mutation DeleteTodo($id: Int!) {
   delete_todos_by_pk(id: $id) {

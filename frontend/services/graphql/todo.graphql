@@ -6,6 +6,7 @@ mutation InsertTodo($title: String!, $is_completed: Boolean!){
       is_completed
       user_id
       file_id
+      file_path
       created_at
       updated_at
     }
@@ -19,13 +20,14 @@ query FetchTodos{
     is_completed
     user_id
     file_id
+    file_path
     created_at
     updated_at
   }
 }
 
-mutation UpdateTodo($id: Int!, $title: String, $is_completed: Boolean) {
-  update_todos_by_pk(pk_columns: {id: $id}, _set: {title: $title, is_completed: $is_completed}) {
+mutation UpdateTodo($id: Int!, $is_completed: Boolean) {
+  update_todos_by_pk(pk_columns: {id: $id}, _set: {is_completed: $is_completed}) {
     id
     created_at
     is_completed
@@ -33,6 +35,20 @@ mutation UpdateTodo($id: Int!, $title: String, $is_completed: Boolean) {
     updated_at
     user_id
     file_id
+    file_path
+  }
+}
+
+mutation InsertTodoFileId($id: Int!, $file_id: Int, $file_path: String) {
+  update_todos_by_pk(pk_columns: {id: $id}, _set: {file_id: $file_id, file_path: $file_path}) {
+    id
+    created_at
+    is_completed
+    title
+    updated_at
+    user_id
+    file_id
+    file_path
   }
 }
 

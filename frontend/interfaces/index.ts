@@ -3,7 +3,8 @@ export interface ITodo {
   title: string
   is_completed: boolean
   user_id: number
-  file_id?: number
+  file_id?: number | null
+  file_path?: string | null
   created_at?: string
   updated_at?: string
 }
@@ -24,6 +25,12 @@ export interface IMarkComplete {
   is_completed: boolean
 }
 
+export interface IDeleteImage {
+  id: number
+  file_id: number
+  file_path: string
+}
+
 export interface SignInForm {
   email: string
   password: string
@@ -31,4 +38,8 @@ export interface SignInForm {
 
 export interface SignUpForm extends SignInForm {
   name: string
+}
+
+export interface IToast {
+  success: boolean, display: boolean, message: string
 }

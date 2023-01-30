@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/client';
 import React from 'react';
-import { IProviderProps, IMarkComplete, ITodo } from '../interfaces';
+import { IProviderProps, IMarkComplete, ITodo, IDeleteImage } from '../interfaces';
 import { FetchTodosDocument, FetchTodosQuery, FetchTodosQueryVariables } from '../services/__generated__';
 import { getUser } from './user';
 
@@ -20,9 +20,9 @@ export const DataProvider = ({ children }: IProviderProps) => {
     setTodos([...todos, { id: todo.id, title: todo.title, is_completed: todo.is_completed, user_id: user.id }]);
   }
 
-  const editTodo = ({ id, newTitle }: any) => {
+  const attachFile = ({ id, file_id, file_path }: any) => {
     const editedTodos: ITodo[] = todos.map(todo => todo.id === id ? {
-      ...todo, title: newTitle
+      ...todo, file_id, file_path
     } : todo);
 
     setTodos(editedTodos);
@@ -38,6 +38,14 @@ export const DataProvider = ({ children }: IProviderProps) => {
 
   const deleteTodo = (id: number) => {
     setTodos(todos.filter(todo => todo.id !== id))
+  }
+
+  const deleteImage = (id: number) => {
+    const updatedTodos: ITodo[] = todos.map(todo => todo.id === id ? {
+      ...todo, file_id: null, file_path: null
+    } : todo);
+
+    setTodos(updatedTodos);
   }
 
   const deleteCompletedTodos = () => {
@@ -58,7 +66,11 @@ export const DataProvider = ({ children }: IProviderProps) => {
   }, [user, data]);
 
   return (
-    <Data.Provider value={{ todos, setTodos, addTodo, editTodo, markComplete, deleteTodo, deleteCompletedTodos, filter, setFilter }}>
+    <Data.Provider value={{
+      todos, setTodos, addTodo, attachFile, markComplete,
+      deleteTodo, deleteImage, deleteCompletedTodos,
+      filter, setFilter
+    }}>
       {children}
     </Data.Provider>
   )

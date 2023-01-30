@@ -6,8 +6,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getUser } from '../context/user';
 import { SignInForm } from '../interfaces';
+import { IUser } from '../interfaces'
+
+import { useGlue, IAuthProviderEnum } from "@gluestack/glue-client-sdk-react";
 
 const signin = () => {
+  const { glue } = useGlue(["AUTH:*"]);
   const router = useRouter();
   const { updateUser }: any = getUser();
   const [formData, setFormData] = React.useState<SignInForm>({
@@ -30,25 +34,24 @@ const signin = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_ENGINE_AUTH_URL}/signin`, {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      })
+      const response: any | IUser = await glue.auth.login({
+        args: {
+          email: formData.email,
+          password: formData.password
+        }
+      });
 
-      const data = await response.json()
-
-      if (!data.success) {
-        console.log(data.message);
-        setError(data.message);
-        return
+      if (!response || typeof response === 'string') {
+        setError(response ? response : "something went wrong!");
+        return;
       }
 
+      //@ts-ignore
       updateUser({
-        id: data?.data?.id,
-        name: data?.data?.name,
-        email: data?.data?.email,
-        token: data?.data?.token
+        id: response.id,
+        name: response.name,
+        email: response.email,
+        token: response.token
       })
 
       router.push("/")
@@ -71,7 +74,7 @@ const signin = () => {
           <Input placeholder="Email" type="text" value={formData.email} label="Email" name="email" onChange={onChangeHandler} />
           <Input placeholder="Password" type="password" value={formData.password} label="Password" name="password" onChange={onChangeHandler} />
           <div className={`${!error && 'invisible'} text-red-400 font-mono`}>{error}</div>
-          <Button onClick={submitHandler} className="mt-2 hover:bg-purple-500 hover:border-purple-500">Submit</Button>
+          <Button onClick={submitHandler} className="mt-2 p-2 hover:bg-purple-500 hover:border-purple-500">Submit</Button>
         </form>
         <div className='text-lg font-thin text-left' >
           Don't have an account! <Link href={"/signup"} className='text-purple-500 font-normal'>SignUp</Link>

@@ -6,8 +6,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getUser } from '../context/user';
 import { SignUpForm } from '../interfaces';
+import { IUser } from '../interfaces'
+
+import { useGlue } from "@gluestack/glue-client-sdk-react";
 
 const signup = () => {
+  const { glue } = useGlue(["AUTH:*"]);
   const router = useRouter();
   const { updateUser }: any = getUser();
   const [formData, setFormData] = React.useState<SignUpForm>({
@@ -29,25 +33,22 @@ const signup = () => {
     }
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_ENGINE_AUTH_URL}/signup`, {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+      const response: any | IUser = await glue.auth.signupWithEmail({
+        email: formData.email,
+        password: formData.password,
+        name: formData.name
       })
 
-      const data = await response.json()
-
-      if (!data.success) {
-        console.log(data.message);
-        setError(data.message);
-        return
+      if (!response || typeof response === 'string') {
+        setError(response ? response : "something went wrong!");
+        return;
       }
 
       updateUser({
-        id: data?.data?.id,
-        name: data?.data?.name,
-        email: data?.data?.email,
-        token: data?.data?.token
+        id: response.id,
+        name: response.name,
+        email: response.email,
+        token: response.token
       })
 
       router.push("/")

@@ -1,10 +1,12 @@
 import React from 'react'
+import { useApp } from '../context/app';
 import { useData } from '../context/data';
 import { InsertTodoMutationVariables, useInsertTodoMutation } from '../services/__generated__';
 import SideBar from './SideBar';
 
 const InputBox = () => {
   const { addTodo }: any = useData();
+  const { toggleToast }: any = useApp();
   const [title, setTitle] = React.useState('');
 
   const [insertData, { loading, error }] = useInsertTodoMutation()
@@ -21,9 +23,12 @@ const InputBox = () => {
       const { data } = await insertData({ variables: newTodo })
       addTodo(data?.insert_todos?.returning[0])
 
+      toggleToast({ success: true, display: true, message: 'Todo added successfully!' })
+
       setTitle("")
     } catch (error) {
       console.error(error);
+      toggleToast({ success: false, display: true, message: 'something went wrong!' });
     }
   }
 
