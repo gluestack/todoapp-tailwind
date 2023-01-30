@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import Locals from "./locals";
 import Routes from "./routes";
 
@@ -16,28 +17,20 @@ class Express {
 
     this.mountDotEnv();
     this.mountRoutes();
-
-    this.express.use(function (req: any, res: any, next: any) {
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header(
-        "Access-Control-Allow-Headers",
-        "Origin, X-Requested-With, Content-Type, Accept",
-      );
-      next();
-    });
   }
 
   /**
    * Mount envirements variables
-   */
-  private mountDotEnv(): void {
-    this.express = Locals.init(this.express);
-  }
+  */
+ private mountDotEnv(): void {
+   this.express = Locals.init(this.express);
+ }
 
   /**
    * Mounts all the defined routes
-   */
-  private mountRoutes(): void {
+  */
+ private mountRoutes(): void {
+    this.express.use(cors({ exposedHeaders: ["x-hasura-user-token"] }));
     this.express.use(express.json());
     this.express = Routes.storage(this.express);
   }
