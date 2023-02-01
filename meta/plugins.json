@@ -22,5 +22,11 @@
   },
   "@gluestack/glue-plugin-web": {
     "package": "node_modules/@gluestack/glue-plugin-web"
+  },
+  "@gluestack/glue-plugin-service-nodemailer": {
+    "package": "node_modules/@gluestack/glue-plugin-service-nodemailer"
+  },
+  "@gluestack/glue-plugin-service-node": {
+    "package": "node_modules/@gluestack/glue-plugin-service-node"
   }
 }

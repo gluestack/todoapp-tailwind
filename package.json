@@ -16,14 +16,16 @@
   "license": "ISC",
   "dependencies": {
     "@gluestack/framework": "^0.0.x",
-    "@gluestack/glue-plugin-auth": "^0.0.26",
-    "@gluestack/glue-plugin-backend-engine": "^0.0.11",
-    "@gluestack/glue-plugin-engine": "^0.0.51",
-    "@gluestack/glue-plugin-graphql": "^0.0.32",
-    "@gluestack/glue-plugin-minio": "^0.0.12",
-    "@gluestack/glue-plugin-postgres": "^0.0.17",
-    "@gluestack/glue-plugin-storage": "^0.0.22",
-    "@gluestack/glue-plugin-web": "^0.1.12"
+    "@gluestack/glue-plugin-auth": "^0.0.x",
+    "@gluestack/glue-plugin-backend-engine": "^0.0.x",
+    "@gluestack/glue-plugin-engine": "^0.0.x",
+    "@gluestack/glue-plugin-graphql": "^0.0.x",
+    "@gluestack/glue-plugin-minio": "^0.0.x",
+    "@gluestack/glue-plugin-postgres": "^0.0.x",
+    "@gluestack/glue-plugin-service-node": "^0.0.x",
+    "@gluestack/glue-plugin-storage": "^0.0.x",
+    "@gluestack/glue-plugin-web": "^0.x.x",
+    "@gluestack/glue-plugin-service-nodemailer": "^0.0.1"
   },
   "peerDependencies": {
     "@gluestack/framework": "^0.0.x"

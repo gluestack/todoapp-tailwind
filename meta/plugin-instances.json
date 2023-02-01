@@ -54,5 +54,19 @@
       "directory": "./frontend",
       "container_store": {}
     }
+  ],
+  "@gluestack/glue-plugin-service-nodemailer": [
+    {
+      "instance": "email",
+      "directory": "./backend/services/email",
+      "container_store": {}
+    }
+  ],
+  "@gluestack/glue-plugin-service-node": [
+    {
+      "instance": "auth-service",
+      "directory": "./backend/services/auth-service",
+      "container_store": {}
+    }
   ]
 }
